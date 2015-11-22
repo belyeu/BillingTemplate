@@ -28,3 +28,18 @@
   content: "";
   padding: 0;
 }
+td, th {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #ccc;
+  text-align: center;
+  ;
+}
+th {
+  background: lightblue;
+  border-color: white;
+  font-size: 1em;
+}
+body {
+  padding: 1rem;
+}

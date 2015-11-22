@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -6,12 +7,22 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>PCH Billing Statement</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="app.css">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="view1/css/app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
@@ -26,8 +37,247 @@
 
   <div ng-view></div>
 
-  <div>Angular seed app: v<span app-version></span></div>
+ <div class="text-center"><h1>Billing Statement</h1></div>
+  
+ <div class="container">
+<div>
+  <p>Personal Care Home: <input type="text" ng-model="name"></p>
 
+ <p><span>Address:</span><input type="text" ng-model="address"></p>
+
+ <p>Phone: <input type="text"  ng-model="phone"></p>
+
+
+ <p>Print Check as: <input type="text" ng-model="checkAs"></p>
+  <div class="col-md-4">
+ <p>Resident1: <input type="text" ng-model="res1"></p>
+
+ <p>Resident2: <input type="text" ng-model="res2"></p>
+
+ <p>Resident3: <input type="text" ng-model="res3"></p>
+ </div>
+ <div class="col-md-8">
+ <p>Resident {{res1}} total days present: <input type="text" ng-model="res1Tot"></p>
+
+ <p>Resident {{res2}} total days present: <input type="text" ng-model="res2Tot"></p>
+
+ <p>Resident {{res3}} total days present: <input type="text" ng-model="res3Tot"></p>
+</div>
+</div>
+</div><div class="text-center">
+<br>
+<span> Month:<input type="text" ng-model="month"></span>
+</div></div>
+<div class="row">
+  
+  <div class="col-md-4">
+<div class="container" ng-app="" ng-init="pchName,">
+  <p>Personal Care Home: {{ name }}</p>
+ <p>Address: {{ address }}</p>
+ <p>Phone: {{ phone }}</p>
+ <p>Print Check as: {{ checkAs }}</p>
+</div></div>
+<div class="col-md-4">
+<div class="container" ng-app="" >
+  <div >Codes</div>
+ <p>P = Present </p>
+ <p>H = Hospitalized </p>
+ <p>M = Moved out</p>
+ <p>V = Vacation/Holiday</p>
+</div>
+</div>
+
+<div class="col-md-4"  value = 'toggle' ng-init='standCheck = false',ng-init="directDeposit= true">
+<form name="myForm" >
+  <label>Standard Check:
+    <input type="checkbox"  ng-model='standCheck' ng-click="directDeposit= false">
+  </label><br/>
+  <label>Direct Deposit:
+    <input type="checkbox"ng-init='directDeposit = true' ng-model='directDeposit'ng-click="standCheck= false" 
+         >
+   </label><br/>
+  </form>
+</div>
+ </div><br>
+<div ng-controller="View1Ctrl as vm" class="text-center">
+<span> Month: {{ vm.month }}</span>
+</div>
+
+<br>
+</div>
+</div>
+ </div>
+
+ 
+ </div>
+   
+    </div>
+<!--    <div style="overflow:auto;width:90%;">
+
+            <!-- This is the div that does the trick: -
+ <div class="row">          
+<div class="col-md-2"><label>Residents 
+   
+ </label>
+ <p>1. {{res1}}<br> 
+  2. {{res2}} <br>
+  3. {{res3}} </p>
+  
+</div>
+<div class="col-md-1"><label>Total
+   
+ </label>
+ <p> {{res1Tot}}<br> 
+  {{res2Tot}} <br>
+  {{res3Tot}} </p>
+  
+</div>
+<div class="col-md-4">
+ <div style="width:1260px; display:inline-block"> 
+ <div   style="display: inline-block" data-ng-repeat="n in [].constructor(31) track by $index"ng-controller="DemoController">
+<label>{{ $index+1 }}</label><br>
+           <select  ng-model="currentlySelected" ng-options="opt as opt.label for opt in options track by opt.value" ng-change="logResult()">
+            </select>
+
+            </div>  
+
+           
+  <br>  
+
+ <div style="display: inline-block" data-ng-repeat="n in [].constructor(31) track by $index"ng-controller="DemoController">
+
+           <select ng-model="currentlySelected" ng-options="opt as opt.label for opt in options track by opt.value" ng-change="logResult()">
+            </select>
+
+            </div>
+
+   <br>       
+ <div style="display: inline-block" data-ng-repeat="n in [].constructor(31) track by $index"ng-controller="DemoController">
+
+           <select ng-model="currentlySelected" ng-options="opt as opt.label for opt in options track by opt.value" ng-change="logResult()">
+            </select>
+</div>
+            </div>
+<div class="container" ng-app="" ng-init="pchName,">
+
+-->
+
+
+  <p>Signature:
+ </p>
+ <div>Date
+    {{ AssignedDate.now() | date:'yyyy-MM-dd HH:mm:ss'}}
+</div>
+ 
+</div></div>
+</div></div>
+<div>
+<table>
+  <tr>
+  <th>Resident</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+    <th>6</th>
+    <th>7</th>
+    <th>8</th>
+    <th>9</th>
+    <th>10</th>
+    <th>11</th>
+    <th>12</th>
+    <th>13</th>
+    <th>14</th>
+    <th>15</th>
+    <th>16</th>
+    <th>17</th>
+    <th>18</th>
+    <th>19</th>
+    <th>20</th>
+    <th>21</th>
+    <th>22</th>
+    <th>23</th>
+    <th>24</th>
+    <th>25</th>
+    <th>26</th>
+    <th>27</th>
+    <th>28</th>
+    <th>29</th>
+    <th>30</th>
+    <th>31</th>
+<th>Total</th>
+  </tr>
+  <tr>
+  <th>{{res1}}</th>
+    <td  data-ng-repeat="n in [].constructor(31) track by $index"ng-controller="DemoController as vm">
+
+           <select ng-model="currentlySelected" ng-options="opt as opt.label for opt in vm.options track by opt.value" ng-change="logResult()">
+            </select>
+        
+              
+            
+</td>
+   
+  </tr>
+  <tr>
+   <th>{{res2}}</th>
+
+    <td  data-ng-repeat="n in [].constructor(31) track by $index"ng-controller="DemoController as vm">
+
+           <select ng-model="currentlySelected" ng-options="opt as opt.label for opt in vm.options track by opt.value" ng-change="logResult()">
+            </select>
+</td>
+   
+  </tr>
+   <tr>
+   <th>{{res3}}</th>
+
+    <td  data-ng-repeat="n in [].constructor(31) track by $index"ng-controller="DemoController">
+
+           <select ng-model="currentlySelected" ng-options="opt as opt.label for opt in options track by opt.value" ng-change="logResult()">
+            </select>
+</td>
+   
+  </tr>
+   <tr>
+   <th>{{res4}}</th>
+
+    <td  data-ng-repeat="n in [].constructor(31) track by $index"ng-controller="DemoController">
+
+           <select ng-model="currentlySelected" ng-options="opt as opt.label for opt in options track by opt.value" ng-change="logResult()">
+            </select>
+</td>
+   
+  </tr>
+   <tr>
+   <th>{{res5}}</th>
+
+    <td  data-ng-repeat="n in [].constructor(31) track by $index"ng-controller="DemoController">
+
+           <select ng-model="currentlySelected" ng-options="opt as opt.label for opt in options track by opt.value" ng-change="logResult()">
+            </select>
+</td>
+   
+  </tr>
+   <tr>
+
+   <th>{{res6}}</th>
+
+    <td  data-ng-repeat="n in [].constructor(31) track by $index"ng-controller="DemoController">
+
+           <select ng-model="currentlySelected" ng-options="opt as opt.label for opt in options track by opt.value" ng-change="logResult()">
+            </select>
+</td>
+   
+  </tr>
+
+</table>  
+      <input type='text' ng-model="total">
+</div>
+</div>
+</div>
+  <!-- I
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
@@ -36,8 +286,10 @@
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
+  <script src="view1/dateCount.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
 </body>
 </html>
+    
